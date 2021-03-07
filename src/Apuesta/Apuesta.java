@@ -51,7 +51,7 @@ public class Apuesta {
       throw new Exception("No se puede apostar mas de lo que tienes");
     }
     {
-      dinero_disp = dinero - dinero_disp;
+      dinero_disp = dinero -  dinero_disp ;
       apostado = dinero;
     }
   }

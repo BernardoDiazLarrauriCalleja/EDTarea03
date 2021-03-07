@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Apuesta.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;Apuesta&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">Apuesta</a> &gt; <span class="el_source">Apuesta.java</span></div><h1>Apuesta.java</h1><pre class="source lang-java linenums">package Apuesta;
+
+public class Apuesta {
+
+    private int dinero_disp;
+    private int goles_local;
+    private int goles_visitante;
+    private int apostado;
+
+    /*Contructor por defecto*/
+    public Apuesta()
+<span class="nc" id="L12">  {</span>
+<span class="nc" id="L13">  }</span>
+
+  /*Contructor por parámetros*/
+  public Apuesta(int dinero_disp, int goles_local, int goles_visitante)
+<span class="fc" id="L17">  {</span>
+<span class="fc" id="L18">    this.dinero_disp = dinero_disp;</span>
+<span class="fc" id="L19">    this.goles_local = goles_local;</span>
+<span class="fc" id="L20">    this.goles_visitante = goles_visitante;</span>
+<span class="fc" id="L21">    this.apostado = 0;</span>
+<span class="fc" id="L22">  }</span>
+
+  /*Método para obtener el valor del atributo dinero_disp*/
+
+  public int getDinero_disp()
+  {
+<span class="fc" id="L28">    return dinero_disp;</span>
+  }
+
+  /*Método para modificar el valor del atributo dinero_disp*/
+
+  public void setDinero_disp(int dinero_disp)
+  {
+<span class="nc" id="L35">    this.dinero_disp = dinero_disp;</span>
+<span class="nc" id="L36">  }</span>
+
+  /*Método para apostar.
+     * Permite elegir la cantidad a apostar, no pudiendo ser inferior a 1 ni superior a tu saldo disponible
+     * Este método será probado con JUnit
+   */
+  public void apostar(int dinero) throws Exception
+  {
+<span class="fc bfc" id="L44" title="All 2 branches covered.">    if (dinero &lt;= 0)</span>
+    {
+<span class="fc" id="L46">      throw new Exception(&quot;No se puede apostar menos de 1€&quot;);</span>
+    }
+
+<span class="fc bfc" id="L49" title="All 2 branches covered.">    if (dinero &gt; dinero_disp)</span>
+    {
+<span class="fc" id="L51">      throw new Exception(&quot;No se puede apostar mas de lo que tienes&quot;);</span>
+    }
+    {
+<span class="fc" id="L54">      dinero_disp = dinero -  dinero_disp ;</span>
+<span class="fc" id="L55">      apostado = dinero;</span>
+    }
+<span class="fc" id="L57">  }</span>
+
+  /*Método que comprueba si se ha acertado el resultado del partido
+     * En caso de que lo haya acertado devuelve true. Chequea que no se metan menos de 0 goles
+     * 
+   */
+
+  public boolean comprobar_resultado(int local, int visitante) throws Exception
+  {
+<span class="fc" id="L66">    boolean acertado = false;</span>
+<span class="fc bfc" id="L67" title="All 4 branches covered.">    if ((local &lt; 0) || (visitante) &lt; 0)</span>
+    {
+<span class="fc" id="L69">      throw new Exception(&quot;Un equipo no puede meter menos de 0 goles, por malo que sea&quot;);</span>
+    }
+
+<span class="fc bfc" id="L72" title="All 4 branches covered.">    if (goles_local == local &amp;&amp; goles_visitante == visitante)</span>
+    {
+<span class="fc" id="L74">      acertado = true;</span>
+    }
+<span class="fc" id="L76">    return acertado;</span>
+  }
+
+  /* Método para cobrar la apuesta.
+     * Comprueba que se acertó el resultado y, en ese caso, añade el valor apostado multiplicado por 10
+     * al saldo disponible
+     * Este método se va a probar con Junit
+   */
+
+  void cobrar_apuesta(int cantidad_goles_local, int cantidad_goles_visit) throws Exception
+  {
+
+<span class="fc bfc" id="L88" title="All 2 branches covered.">    if (comprobar_resultado(cantidad_goles_local, cantidad_goles_visit) == false)</span>
+    {
+<span class="fc" id="L90">      throw new Exception(&quot;No se puede cobrar una apuesta no acertada&quot;);</span>
+    }
+<span class="fc" id="L92">    dinero_disp = dinero_disp * 10;</span>
+
+<span class="fc" id="L94">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>
